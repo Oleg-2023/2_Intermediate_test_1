@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.8-alpine3.18
+    container_name: bikes_cont
+    restart: always
+    environment:
+      POSTGRES_DB: "bikes"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "biker2023"  
+    volumes:
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5430:5432
