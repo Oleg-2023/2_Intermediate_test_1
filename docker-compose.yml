@@ -3,12 +3,13 @@ services:
   postgres:
     image: postgres:14.8-alpine3.18
     container_name: bikes_cont
-    restart: always
     environment:
       POSTGRES_DB: "bikes"
       POSTGRES_USER: "admin"
-      POSTGRES_PASSWORD: "biker2023"  
+      POSTGRES_PASSWORD: "biker2023"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
     volumes:
-    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./csv:/var/lib/postgresql/csv
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - 5430:5432
